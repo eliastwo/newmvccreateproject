@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+    <h1>Model-View-Controller (MVC) Custom Builder</h1>
+    <h2>Database Connection Information</h2>
+
+    <div class="container">
+        <form class="frm" method="post" action="/api/data">
+            <div class="form-group col-md-2">
+            <div></div>
+                <label for="exampleFormControlSelect1">Db Type</label>
+                <select class="form-control" id="dbType">
+                    <option value="" disabled selected>Type</option>
+                    <option>MySQL</option>
+                    <option>PostgreSQL</option>
+                    <option>MSSQP</option>
+                    <option>SQLite</option>
+                </select>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="fname" class="control-label">db Name</label>
+                <input type="text" class="form-control" id="dbName" placeholder="Database Name" name="dbName" />
+            </div>
+            <div class="form-group col-md-2">
+                <label for="sname" class="control-label">db Login</label>
+                <input type="text" value='' class="form-control" id="dbLoginName" placeholder="Database Login Name" name='dbLoginName'/>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="job" class="control-label">db Password</label>
+                <input type="text" value='' class="form-control" id="dbLoginPassword" placeholder="Database Login Password" name='dbLoginPswd'/>
+            </div>  
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <h2>Database Table Information</h2>
+
+    <div class="tablenameWrapper">
+    <div class="entireTable table1">
+        <div class="container">
+            <form class="frm">
+                <div>
+                    <div class="form-group col-md-2">
+                        <label for="title" class="control-label">Table Name</label>
+                        <input type="text" value='' class="form-control" id="t1Name" placeholder="Table Name"/>
+                    </div>
+                </div>
+                <div>
+                    <span class="addTable">Add table</span>
+                </div>
+            </form>
+        </div>
+
+        <div class="container">
+            <form class="frm1" method="post" action="/api/data">
+                <div class="rowWrapper">
+                    <div class="row tableRow row1">
+                        <div class="form-group col-md-2">
+                            <label for="sname" class="control-label">Column Name</label>
+                            <input type="text" value='' class="form-control" id="cName" placeholder="Column Name" name="column1Name"/>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="exampleFormControlSelect1">Is Primary</label>
+                            <select class="form-control" id="isPrimary" name="column1IsPrimary">
+                                <option value="" disabled selected>Null?</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="exampleFormControlSelect1">Data Type</label>
+                            <select class="form-control" id="dataType" name="Column1DataType">
+                                <option value="" disabled selected>Data Type</option>
+                                <option>Integer</option>
+                                <option>String</option>
+                                <option>Date</option>
+                                <option>Boolean</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="exampleFormControlSelect1">Is Null</label>
+                            <select class="form-control" id="isNell" name="Column1IsNull">
+                                <option value="" disabled selected>Null?</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                        <span class="remove">Remove</span>      
+                    </div>
+                </div>
+                    <div>
+                        <span class="add" onclick="addField( this )">Add fields</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    <script>
+
+    //need to clone event handlers
+    function addField( span ){
+            let table = $(span).parents( ".entireTable" );
+            $( ".tableRow", table )
+            let changeRowClass = $(rowCopy).clone(true, true).appendTo($( ".rowWrapper", table ));
+            $(changeRowClass).addClass('row' + $( ".tableRow", table ).length);
+            $(changeRowClass).removeClass('row1');
+            return false;
+        };
+
+        $(".addTable").click(function() {
+            var changeTableClass = $(tableCopy).clone(true, true).appendTo(".tablenameWrapper");
+            $(changeTableClass).addClass('table' + $('.entireTable').length);
+            $(changeTableClass).removeClass('table1');
+            return false;
+    });
+
+    $(".remove").click(function() {
+        $(this).parent().remove();
+    });    
+
+    var rowCopy = $(".tableRow:first-of-type").clone(true, true);
+    var tableCopy = $(".entireTable:first-of-type").clone(true, true);
+    </script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+
+</body>
+
+</html>
